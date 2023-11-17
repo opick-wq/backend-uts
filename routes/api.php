@@ -23,6 +23,11 @@ Route::get('/employees/{id}',[ControllerEmployess::class, 'show']);
 Route::delete('/employees/{id}',[ControllerEmployess::class, 'destroy']);
 Route::get('/employees/search/{name}',[ControllerEmployess::class, 'search']);
 Route::get('/employees/status/active',[ControllerEmployess::class, 'active']);
+Route::get('/employees/status/inactive',[ControllerEmployess::class, 'inactive']);
+Route::get('/employees/status/terminated',[ControllerEmployess::class, 'terminated']);
+
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

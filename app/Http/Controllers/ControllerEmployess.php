@@ -174,10 +174,9 @@ class ControllerEmployess extends Controller
     return response()->json($data, 200);
     }
 
-    public function active($status){
-    if (!$status) {
-        return response()->json(['message' => 'Status parameter is required'], 400);
-    }
+    public function active(Request $request)
+    {
+    $status = 'active'; // Set nilai status
 
     $resources = Employees::where('status', $status)->get();
 
@@ -186,12 +185,49 @@ class ControllerEmployess extends Controller
     }
 
     $data = [
-        'message' => 'Resources by Status',
-        'data' => $resources,
+        'message' => 'Get active resource ',
         'total' => $resources->count(),
+        'data' => $resources
     ];
 
     return response()->json($data, 200);
     }
-    
+
+    public function inactive(Request $request)
+    {
+    $status = 'inactive'; // Set nilai status
+
+    $resources = Employees::where('status', $status)->get();
+
+    if ($resources->isEmpty()) {
+        return response()->json(['message' => 'No resources found with the specified status'], 404);
+    }
+
+    $data = [
+        'message' => 'Get inactive resource ',
+        'total' => $resources->count(),
+        'data' => $resources
+    ];
+
+    return response()->json($data, 200);
+    }
+
+    public function terminated(Request $request)
+    {
+    $status = 'terminated'; // Set nilai status
+
+    $resources = Employees::where('status', $status)->get();
+
+    if ($resources->isEmpty()) {
+        return response()->json(['message' => 'No resources found with the specified status'], 404);
+    }
+
+    $data = [
+        'message' => 'Get terminated resource ',
+        'total' => $resources->count(),
+        'data' => $resources
+    ];
+
+    return response()->json($data, 200);
+    }
 }
